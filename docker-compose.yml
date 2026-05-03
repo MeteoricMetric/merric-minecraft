@@ -112,16 +112,25 @@ services:
       RCON_PORT: "25575"
 
       # — Plugins (the v1.1 starter pack — see docs/PLUGIN-GOVERNANCE.md) ──
-      # Tier 1 (REQUIRED) plugins use direct download URLs from the
-      # GeyserMC project's official CDN. These are auth/network-critical
-      # and pinned to "latest" of a known-stable branch.
+      #
+      # Source mix:
+      #   PLUGINS — direct download URLs (Geyser/Floodgate from GeyserMC's
+      #             official CDN; Vault from MilkBowl's GitHub release). Pinned
+      #             versions for the security-relevant ones per master §5.
+      #   MODRINTH — primary plugin source; auto dependency resolution +
+      #              version-compat checks against the running Minecraft version
+      #              (PLUGIN-GOVERNANCE.md §3 marks Modrinth as preferred).
+      #
+      # Why no SPIGET_RESOURCES: api.spiget.org went unreliable on first boot
+      # 2026-05-03 (failed to serve resource 9089). EssentialsX, Multiverse,
+      # and DiscordSRV all exist on Modrinth — moved there. Vault is not on
+      # Modrinth as the canonical MilkBowl project, so it goes via direct
+      # GitHub URL instead.
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+        https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
 
-      # Tier 2 (REQUIRED) infrastructure + Tier 3 (RECOMMENDED) QoL plugins.
-      # These come from Modrinth, which provides automated dependency resolution
-      # and version compatibility checks against the Minecraft version.
       MODRINTH_PROJECTS: |
         viaversion
         viabackwards
@@ -132,19 +141,10 @@ services:
         chunky
         spark
         squaremap
+        essentialsx
+        multiverse-core
+        discordsrv
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
-
-      # Plugins from SpigotMC (resource IDs):
-      #   9089  — EssentialsX (Tier 2, REQUIRED)
-      #   390   — Multiverse-Core (Tier 3, RECOMMENDED)
-      #   18494 — DiscordSRV (Tier 4, OPTIONAL — event-notify-only by default
-      #           per CHILD-SAFETY-PRIVACY.md §4)
-      #   34315 — Vault (Tier 2, REQUIRED — many plugins depend on it)
-      SPIGET_RESOURCES: |
-        9089
-        390
-        18494
-        34315
 
       # — Auto-pause when nobody's online (saves CPU) —
       ENABLE_AUTOPAUSE: "true"
