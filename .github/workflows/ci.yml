@@ -33,7 +33,7 @@ jobs:
     name: shellcheck
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: install shellcheck
         run: |
@@ -47,7 +47,7 @@ jobs:
     name: docker-compose validate
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: validate docker-compose.yml
         # Stub values for required env vars — compose config only parses the
