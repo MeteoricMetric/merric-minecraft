@@ -20,7 +20,7 @@ MC_PORT = "25565"
 
 [[kv_namespaces]]
 binding = "MC_STATUS_CACHE"
-id = "PASTE_NAMESPACE_ID_FROM_WRANGLER_CREATE_OUTPUT"
+id = "4d5c25def3c744f5a622ebed6ec85eef"
 
 # Cron — warm the cache every minute so first visitor doesn't wait
 [triggers]
