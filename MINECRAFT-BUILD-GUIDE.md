@@ -2,7 +2,7 @@
 
 > The Minecraft server build for `merric-minecraft` repo, deployed on Shane's home workstation, exposed via playit.gg, status widget rendered on merricstrough.com/minecraft.
 >
-> **Stack:** Paper 1.21.11 + Geyser + Floodgate + 13-plugin starter pack, in Docker. playit.gg agent in same compose stack. Live status widget via Cloudflare Worker.
+> **Stack:** Paper 1.21.11 + Geyser + Floodgate + 13-plugin starter pack, in Docker. playit.gg agent in same compose stack. Live status widget served by the website repo's worker (per ADR-0009).
 >
 > **Companion documents** (read alongside this guide):
 > - `docs/RUNBOOK.md` — day-to-day operations, change-management ladder, incident response
@@ -112,13 +112,11 @@ merric-minecraft/
 │   ├── restore.sh
 │   ├── update-plugins.sh
 │   └── ops.sh
-├── worker/
-│   ├── src/
-│   │   └── index.js
-│   ├── wrangler.toml
-│   └── package.json
 └── plugins-config/
     └── (plugin configs we'll generate after first boot)
+
+# The status widget worker lives in the merricstrough.com website repo,
+# not here — see ADR-0009.
 ```
 
 (Each artifact is provided as a separate file — paste contents in.)
@@ -143,11 +141,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
-
-# Worker build artifacts
-worker/node_modules/
-worker/dist/
-worker/.wrangler/
 ```
 
 ### 0.5 First commit
@@ -515,60 +508,60 @@ Console Bedrock players cannot directly enter a server address the way Java or m
 
 ## Phase 6 — Live status widget on merricstrough.com/minecraft
 
-This is the part that makes the website a real piece of infrastructure, not just a brochure.
+The status widget is served by the **website repo's worker**, not by code in
+this repo. See [ADR-0009](docs/decisions/ADR-0009-status-widget-worker-location.md)
+for the architecture decision.
 
 ### 6.1 Architecture
 
 ```
-[merricstrough.com/minecraft] ←─ fetch JSON ─→ [Cloudflare Worker]
-                                                       │
-                                                  every 60s
-                                                       ↓
-                                          [mc.merricstrough.com:25565]
-                                          via Minecraft Server List Ping protocol
+[merricstrough.com/minecraft]
+    ↓ fetch JSON
+[merricstrough-now-playing worker — in MeteoricMetric.github.io repo]
+    ↓ /api/minecraft-status
+[api.mcstatus.io v2/status/java/{address}]
+    ↓ SLP query
+[mc.merricstrough.com:25565 — playit-tunneled to this server]
 ```
 
-The Worker:
-- Polls the server every 60 seconds via SLP protocol
-- Caches result in Cloudflare KV for 60s
-- Returns JSON: `{ online, players, motd, version, latency_ms }`
-- Same pattern as the Spotify Now Spinning worker — reuse the deployment workflow
+The website's `MinecraftStatus.astro` component polls
+`/api/minecraft-status` every 60s. The worker proxies `api.mcstatus.io` with
+edge caching, so concurrent visitors don't hammer the upstream.
 
-### 6.2 Deploy the worker
+### 6.2 What this repo's job is
 
-Files in `worker/` directory of this repo (provided separately).
+Once the Minecraft server is up (Phase 5), set the public address in the
+website repo's worker config:
 
 ```bash
-cd worker
-npm install
-npx wrangler login                    # opens browser, log in to Cloudflare
-npx wrangler kv namespace create MC_STATUS_CACHE
-# copy the namespace ID it prints, paste into wrangler.toml
+cd ../merricstrough-com/worker
+# edit wrangler.toml: MINECRAFT_SERVER_ADDRESS = "your-playit-hostname:port"
 npx wrangler deploy
 ```
 
-Worker is now live at `https://merric-mc-status.<your-cf-subdomain>.workers.dev`.
-
-Test it:
+Smoke test the endpoint:
 
 ```bash
-curl https://merric-mc-status.<...>.workers.dev/status
-# {"online":true,"players":{"online":2,"max":20,"sample":[...]},"motd":"MeteoricCraft","version":"1.21.11","latency_ms":42}
+curl https://merricstrough-now-playing.meteoricmetric.workers.dev/api/minecraft-status
+# {"online":true,"players":{"current":2,"max":20},"motd":"MeteoricCraft","version":"1.21.11","lastChecked":"..."}
 ```
 
-### 6.3 Update the website's /minecraft page
+That's the entire integration — the `/minecraft` page on the live website
+will start showing real data within 60s of the server coming online.
 
-In the `merricstrough.com` repo (this is a separate repo from `merric-minecraft`), promote the stub `/minecraft` route to a real page. See `worker/frontend-snippet.astro` (provided separately) for the exact component code.
+### 6.3 The widget UI
 
-The page will show:
+The website's `src/components/MinecraftStatus.astro` already renders:
 
-- ✅ **Online indicator** — animated pulse, green when up, red when down
-- 🎮 **Connection details** — `mc.merricstrough.com` for Java, the Bedrock address + port
-- 👥 **Live player count** — refreshes every 60s on the page
-- 💬 **MOTD** — the message of the day
-- 📋 **Server rules** — markdown content editable via Pages CMS
-- 🗺️ **BlueMap embed** — iframe showing the live web map (Phase 7)
-- 📅 **"Updated"** timestamp — from the worker cache age
+- ✅ Online/offline indicator with pulse animation (respects `prefers-reduced-motion`)
+- 👥 Live player count (current / max)
+- 💬 MOTD (cleaned of color codes)
+- 🎮 Server version
+- 🗺️ Server favicon (when present)
+- 📅 Last-checked timestamp
+
+No frontend work needed in this repo. If the widget design needs to change,
+that's a website-repo PR.
 
 ---
 
@@ -767,7 +760,7 @@ For when things go sideways. Order of operations:
 
 Every Sunday evening (when Shane and Merric do their weekly review):
 
-- [ ] Server still online?  `curl https://merric-mc-status.workers.dev/status`
+- [ ] Server still online?  `curl https://merricstrough-now-playing.meteoricmetric.workers.dev/api/minecraft-status`
 - [ ] Disk space OK?  `df -h /`
 - [ ] Backups completing?  `tail logs/backup.log`
 - [ ] Plugin updates available?  `./scripts/update-plugins.sh --dry-run`

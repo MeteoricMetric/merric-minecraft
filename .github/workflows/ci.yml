@@ -1,13 +1,13 @@
 name: ci
 
-# Three independent jobs that validate the things this repo can break:
+# Two independent jobs that validate the things this repo can break:
 #   1. shellcheck — scripts/{ops,backup,restore}.sh run on the Ubuntu host
 #   2. compose-validate — docker-compose.yml is parseable + structurally valid
-#   3. worker-smoke — wrangler 4.x boots under Node 22 (the new minimum)
 #
-# Intentionally light. We don't deploy from CI (worker deploy is interactive;
-# server is on a home workstation, not CI-reachable). Real validation of the
-# server stack happens in the manual smoke tests in CLAUDE.md §Testing.
+# Intentionally light. We don't deploy from CI — the server is on a home
+# workstation, not CI-reachable. Real validation of the server stack happens
+# in the manual smoke tests in CLAUDE.md §Testing. The status widget worker
+# lives in the website repo and has its own CI (per ADR-0009).
 
 on:
   push:
@@ -60,24 +60,3 @@ jobs:
           BLUEMAP_WEBSERVER_PASSWORD: ci-stub
         run: docker compose config --quiet
 
-  worker-smoke:
-    name: worker smoke (Node 22 + wrangler)
-    runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: worker
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: install worker deps
-        run: npm install --no-save --no-fund --no-audit
-
-      - name: wrangler version (smoke — confirms it boots under Node 22)
-        run: npx wrangler --version
-
-      - name: parse wrangler.toml
-        run: npx wrangler deploy --dry-run --outdir=/tmp/wrangler-dryrun

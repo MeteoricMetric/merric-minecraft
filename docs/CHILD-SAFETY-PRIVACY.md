@@ -64,17 +64,17 @@
 
 ### 2.4 The `players.sample` field — special handling
 
-The Cloudflare Worker that powers the status widget receives a `players.sample` field in the SLP response. This is a list of currently-online usernames.
+The status widget worker (in the website repo, per ADR-0009) receives a `players.sample` field in upstream Minecraft status responses. This is a list of currently-online usernames.
 
 **Default policy:** the sample list is **NOT exposed** on the public `/minecraft` page. The page shows the count and a label like "3 players online" without names.
 
 **Override:** if Merric chooses to display names (e.g., "showing my friends are on right now"), this requires:
 1. Explicit conversation with Shane about why
 2. Update to this policy with a documented decision
-3. Update to the Worker config and frontend
+3. Update to the worker's response shape AND the frontend `MinecraftStatus.astro` component (both in the website repo)
 4. Whitelist-only enforcement still required (these are friends, not strangers)
 
-The Worker code already filters this: see `worker/src/index.js` — the response includes `players.sample` only because that's the Minecraft protocol. The frontend is responsible for showing or hiding it. Default frontend hides it.
+The website worker code is responsible for filtering this — see `worker/src/minecraft.ts` in `MeteoricMetric/MeteoricMetric.github.io`. The current default does not include `players.sample` in the response, by construction.
 
 ---
 

@@ -18,7 +18,7 @@ Built side-by-side by Merric (13) and his dad — this is the infrastructure-as-
 - **13-plugin starter pack** (see `docs/PLUGIN-GOVERNANCE.md` §3): EssentialsX, LuckPerms, CoreProtect, WorldEdit, WorldGuard, Multiverse, DiscordSRV, Vault, BlueMap, Chunky, Spark, ViaVersion, ViaBackwards
 - **Docker Compose** for orchestration
 - **restic** for daily atomic world backups (7-day rolling, quarterly restore drills)
-- **Cloudflare Worker** serving live status JSON to merricstrough.com (privacy-filtered: count without names by default)
+- **Live status widget** at [merricstrough.com/minecraft](https://merricstrough.com/minecraft) (privacy-filtered: count without names by default) — implemented in the [website repo's worker](https://github.com/MeteoricMetric/MeteoricMetric.github.io/tree/main/worker), per [ADR-0009](docs/decisions/ADR-0009-status-widget-worker-location.md)
 
 ## Quick start
 
@@ -60,6 +60,7 @@ Operational change-management ladder (🟢 safe alone / 🟡 with Dad / 🔴 adu
 | [`docs/decisions/ADR-0006`](docs/decisions/ADR-0006-backup-restore-strategy.md) | Backup and restore strategy (3-2-1, restic, drills) |
 | [`docs/decisions/ADR-0007`](docs/decisions/ADR-0007-plugin-governance.md) | Plugin governance decision |
 | [`docs/decisions/ADR-0008`](docs/decisions/ADR-0008-child-safety-privacy-boundaries.md) | Child-safety and privacy decision |
+| [`docs/decisions/ADR-0009`](docs/decisions/ADR-0009-status-widget-worker-location.md) | Status widget worker lives in the website repo, not here |
 
 ## Connection
 

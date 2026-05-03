@@ -103,7 +103,12 @@ restic gives us:
 
 Atomic snapshots via `rcon save-off` + `save-all flush` before snapshot, then `save-on` immediately after. Backup runs at 3am via cron.
 
-### Status widget: **Cloudflare Worker** querying via SLP protocol
+### Status widget: **Cloudflare Worker** ~~querying via SLP protocol~~
+
+> **Superseded 2026-05-03 by [ADR-0009](ADR-0009-status-widget-worker-location.md).**
+> The worker lives in the website repo (`MeteoricMetric/MeteoricMetric.github.io`),
+> not here, and proxies `api.mcstatus.io` instead of implementing SLP directly.
+> Original rationale below kept for historical context.
 
 Mirrors the architectural pattern already established by the Spotify Now Spinning widget (per ADR-0001). Worker:
 - Polls the server every minute via Minecraft Server List Ping protocol

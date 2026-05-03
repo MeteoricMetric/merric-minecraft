@@ -91,7 +91,6 @@ The change-management ladder (RUNBOOK.md §1) defines what's safe at each tier. 
 - Adding a new plugin (must follow PLUGIN-GOVERNANCE.md §4 install process)
 - Updating the backup script
 - Adjusting plugin permissions structure (LuckPerms groups)
-- Modifying the status worker
 - Configuring DiscordSRV (new install or routine reconfig)
 
 ### Significant tasks (🔴 — research → ADR → human approval → implement)
@@ -128,9 +127,11 @@ When Merric is sitting at the keyboard for ops work:
   - `docs/decisions/ADR-0006` — backup and restore (3-2-1, restic, quarterly drills)
   - `docs/decisions/ADR-0007` — plugin governance
   - `docs/decisions/ADR-0008` — child-safety and privacy
-- Status widget frontend: `worker/frontend-snippet.astro` (drop into website repo)
+  - `docs/decisions/ADR-0009` — status widget worker lives in website repo
+- Status widget: implemented in the website repo's worker (`MeteoricMetric/MeteoricMetric.github.io` → `worker/src/minecraft.ts`). This repo does NOT contain widget code — see ADR-0009.
 
 ---
 
+*v1.2 — 2026-05-03 — ADR-0009 (status widget worker moved to website repo); CI + Dependabot landed; bootstrap session memory captured*
 *v1.1 — May 2026 — added policy docs (RUNBOOK, PLUGIN-GOVERNANCE, CHILD-SAFETY-PRIVACY) and ADRs 0005-0008*
 *v1.0 — initial creation*

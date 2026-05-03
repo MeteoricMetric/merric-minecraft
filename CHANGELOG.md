@@ -6,6 +6,46 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.2.0] — 2026-05-03
+
+### Removed — Cloudflare Worker (moved to website repo)
+
+The standalone status worker (`worker/`) and its Cloudflare resources have
+been removed. The website repo (`MeteoricMetric/MeteoricMetric.github.io`)
+already has a multi-endpoint worker (`merricstrough-now-playing`) with a
+`/api/minecraft-status` route that does the same job — discovered during
+2026-05-02 bootstrap. Two implementations of the same widget is worse than
+one.
+
+- Removed `worker/` directory (frontend-snippet.astro, src/index.js, wrangler.toml, package.json, package-lock.json)
+- Removed `worker-smoke` CI job
+- Removed `npm` ecosystem block from `.github/dependabot.yml`
+- Removed `worker/*` lines from `.gitignore`
+- Deleted Cloudflare worker `merric-mc-status` and KV namespace `MC_STATUS_CACHE`
+
+See [`docs/decisions/ADR-0009`](docs/decisions/ADR-0009-status-widget-worker-location.md)
+for full rationale and consequences.
+
+### Added
+
+- **ADR-0009** — Status widget worker lives in the website repo, not here
+- **`.github/workflows/ci.yml`** — light validation workflow (shellcheck, compose validate)
+- **`.github/dependabot.yml`** — weekly grouped patches (docker + github-actions ecosystems)
+- **`.gitattributes`** — LF normalization for shell scripts (run on Ubuntu host)
+- **`LICENSE`** — MIT (referenced by README but not previously present)
+- **`CLAUDE.local.md`** (gitignored) — operational specifics per master §15 redaction discipline
+- **12 mattpocock skills** at `.agents/skills/` for Claude Code / other AI assistants
+
+### Changed
+
+- **`MINECRAFT-BUILD-GUIDE.md`** — Phase 6 ("Status widget") replaced with cross-reference to website repo
+- **`docs/CHILD-SAFETY-PRIVACY.md`** — `players.sample` worker references point to website repo
+- **`docs/decisions/ADR-0004`** — "Status widget" section noted as superseded by ADR-0009
+- **`CLAUDE.md`** — removed `worker/frontend-snippet.astro` cross-reference; added ADR-0009 to ADR list
+- **`README.md`** — Cloudflare Worker stack-list item rewritten as link to website repo's worker
+
+---
+
 ## [1.1.0] — 2026-05-02
 
 ### Added — new policy documents

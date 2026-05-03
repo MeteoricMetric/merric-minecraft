@@ -1,39 +1,15 @@
 # Dependabot configuration — merric-minecraft
 #
 # Mirrors the merricstrough.com repo's weekly-grouped-patches pattern (per
-# master CLAUDE.md §6.2). The only ecosystem with package-managed deps in this
-# repo is the worker/ Cloudflare Worker (npm). Docker base images are tracked
-# separately (itzg/minecraft-server:java21 and ghcr.io/playit-cloud/playit-agent
-# in docker-compose.yml).
+# master CLAUDE.md §6.2). After ADR-0009 removed the worker dir, this repo
+# has no npm ecosystem of its own. The Docker base images and GitHub Actions
+# are still worth tracking.
 #
 # Reference: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 
 updates:
-  # Cloudflare Worker (status widget backend)
-  - package-ecosystem: "npm"
-    directory: "/worker"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "America/New_York"
-    open-pull-requests-limit: 5
-    groups:
-      worker-deps:
-        patterns:
-          - "*"
-        update-types:
-          - "patch"
-          - "minor"
-    commit-message:
-      prefix: "chore(deps)"
-      include: "scope"
-    labels:
-      - "dependencies"
-      - "worker"
-
   # Docker base images (itzg/minecraft-server, playit agent)
   - package-ecosystem: "docker"
     directory: "/"
