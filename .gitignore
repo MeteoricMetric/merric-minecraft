@@ -34,7 +34,7 @@ worker/.dev.vars
 # Restic password
 .restic-password
 
-# Claude Code — session-local config only; commit shared config (settings.json, skills/, etc.)
+# Claude Code — session-local config only; commit shared config (settings.json, hooks, etc.)
 .claude/settings.local.json
 .claude/cache/
 .claude/file-history/
@@ -44,3 +44,11 @@ worker/.dev.vars
 .claude/statsig/
 .claude/telemetry/
 .claude/todos/
+
+# Per-agent skill symlink dirs — content lives in .agents/skills/ (committed).
+# These hold absolute-path symlinks created by `npx skills add`, which don't
+# survive cross-platform clones. Regenerate after clone with:
+#   npx skills@latest experimental_install   (uses skills-lock.json)
+#   # or: npx skills@latest add mattpocock/skills --skill '*' -y
+/.claude/skills/
+/skills/
