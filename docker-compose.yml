@@ -132,16 +132,21 @@ services:
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
         https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
+        https://ci.lucko.me/job/spark/lastSuccessfulBuild/artifact/spark-paper/build/libs/spark-1.10.172-paper.jar
 
+      # NOTE: CoreProtect deferred. v23.1 (latest, 2026-04) is on Hangar but
+      # only tags up to 1.21.10 — Modrinth's coreprotect entry has the same
+      # gap. Adding it would either fail the boot (strict version check) or
+      # require bypassing checks. Re-add to MODRINTH_PROJECTS once a 1.21.11-
+      # compatible build is published, or pin a Hangar URL with HTTP-403-
+      # workaround. Tracked as a TODO in CHANGELOG.
       MODRINTH_PROJECTS: |
         viaversion
         viabackwards
         luckperms
-        coreprotect
         worldedit
         worldguard
         chunky
-        spark
         squaremap
         multiverse-core
         discordsrv
