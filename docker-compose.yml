@@ -122,14 +122,16 @@ services:
       #              (PLUGIN-GOVERNANCE.md §3 marks Modrinth as preferred).
       #
       # Why no SPIGET_RESOURCES: api.spiget.org went unreliable on first boot
-      # 2026-05-03 (failed to serve resource 9089). EssentialsX, Multiverse,
-      # and DiscordSRV all exist on Modrinth — moved there. Vault is not on
-      # Modrinth as the canonical MilkBowl project, so it goes via direct
-      # GitHub URL instead.
+      # 2026-05-03 (failed to serve resource 9089). Multiverse and DiscordSRV
+      # have current Modrinth builds tagged for Paper 1.21.x. EssentialsX is
+      # on Modrinth too but its files aren't tagged for 1.21.11 yet — pinned
+      # GitHub URL above. Vault is not on Modrinth as the canonical MilkBowl
+      # project (only forks like vaultunlocked / vaultplugin) — also pinned.
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
+        https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
 
       MODRINTH_PROJECTS: |
         viaversion
@@ -141,7 +143,6 @@ services:
         chunky
         spark
         squaremap
-        essentialsx
         multiverse-core
         discordsrv
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
