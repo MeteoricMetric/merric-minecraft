@@ -1,0 +1,31 @@
+# Default: normalize text files to LF in the repo, native on checkout
+* text=auto eol=lf
+
+# Shell scripts run on the Ubuntu host — must keep LF endings
+*.sh        text eol=lf
+
+# YAML / Compose config — also LF (parsers are picky about line endings)
+*.yml       text eol=lf
+*.yaml      text eol=lf
+
+# .env files: never modified by git, but if shipped, LF
+*.env       text eol=lf
+.env.example text eol=lf
+
+# Markdown, JSON, JS — repo standard LF
+*.md        text eol=lf
+*.json      text eol=lf
+*.js        text eol=lf
+*.ts        text eol=lf
+*.astro     text eol=lf
+*.toml      text eol=lf
+
+# Binary safety
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.webp      binary
+*.avif      binary
+*.ico       binary
+*.gz        binary
+*.zip       binary

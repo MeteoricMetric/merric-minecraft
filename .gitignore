@@ -1,0 +1,46 @@
+# Secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
+*.pem
+
+# Local-only operational specifics (hardware models, exact paths, account names)
+# per master CLAUDE.md §15 redaction discipline
+CLAUDE.local.md
+
+# Server data — too large for git, lives on disk
+data/
+backups/
+logs/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor noise
+.vscode/
+.idea/
+*.swp
+*~
+
+# Worker build artifacts
+worker/node_modules/
+worker/dist/
+worker/.wrangler/
+worker/.dev.vars
+
+# Restic password
+.restic-password
+
+# Claude Code — session-local config only; commit shared config (settings.json, skills/, etc.)
+.claude/settings.local.json
+.claude/cache/
+.claude/file-history/
+.claude/projects/
+.claude/sessions/
+.claude/shell-snapshots/
+.claude/statsig/
+.claude/telemetry/
+.claude/todos/
