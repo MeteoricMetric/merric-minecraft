@@ -23,6 +23,11 @@ concurrency:
 permissions:
   contents: read
 
+# Opt into Node.js 24 for action runtimes (actions/checkout, actions/setup-node).
+# GitHub forces this on 2026-06-02; setting it now silences deprecation warnings.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   shellcheck:
     name: shellcheck
