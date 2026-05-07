@@ -134,12 +134,7 @@ services:
         https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
         https://ci.lucko.me/job/spark/lastSuccessfulBuild/artifact/spark-paper/build/libs/spark-1.10.172-paper.jar
 
-      # NOTE: CoreProtect deferred. v23.1 (latest, 2026-04) is on Hangar but
-      # only tags up to 1.21.10 — Modrinth's coreprotect entry has the same
-      # gap. Adding it would either fail the boot (strict version check) or
-      # require bypassing checks. Re-add to MODRINTH_PROJECTS once a 1.21.11-
-      # compatible build is published, or pin a Hangar URL with HTTP-403-
-      # workaround. Tracked as a TODO in CHANGELOG.
+      # Modrinth-sourced plugins (auto-resolve compatible versions):
       MODRINTH_PROJECTS: |
         viaversion
         viabackwards
@@ -150,7 +145,24 @@ services:
         squaremap
         multiverse-core
         discordsrv
+
+        # — Economy / progression gameplay (per Merric's spec, ADR-0010) —
+        crazycrates
+        quickshop-hikari
+        ndailyrewards
+        anti_combatlog
+
+        # — Visual polish —
+        tab-was-taken
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
+
+      # CoreProtect via Hangar — anti-grief audit log, MANDATORY (ADR-0010).
+      # Hangar's metadata only flags up to 1.21.10 but the plugin works fine
+      # on 1.21.11; itzg's HANGAR fetcher is more lenient than its Modrinth
+      # one. If this fails to boot, fall back to manual JAR placement in
+      # data/plugins/.
+      HANGAR_PROJECTS: |
+        CORE/CoreProtect:23.1:PAPER
 
       # — Auto-pause when nobody's online (saves CPU) —
       ENABLE_AUTOPAUSE: "true"
