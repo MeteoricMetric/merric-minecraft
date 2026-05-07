@@ -127,12 +127,13 @@ services:
       # on Modrinth too but its files aren't tagged for 1.21.11 yet — pinned
       # GitHub URL above. Vault is not on Modrinth as the canonical MilkBowl
       # project (only forks like vaultunlocked / vaultplugin) — also pinned.
+      # Paper 1.21.11 bundles spark natively; do not install a separate spark
+      # plugin or it conflicts with the bundled one (.paper-remapped errors).
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
         https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
-        https://ci.lucko.me/job/spark/lastSuccessfulBuild/artifact/spark-paper/build/libs/spark-1.10.172-paper.jar
 
       # Modrinth-sourced plugins (auto-resolve compatible versions).
       # Groups (inline `#` would be parsed as a slug — comment outside the
@@ -157,13 +158,13 @@ services:
         tab-was-taken
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
 
-      # CoreProtect via Hangar — anti-grief audit log, MANDATORY (ADR-0010).
-      # Hangar's metadata only flags up to 1.21.10 but the plugin works fine
-      # on 1.21.11; itzg's HANGAR fetcher is more lenient than its Modrinth
-      # one. If this fails to boot, fall back to manual JAR placement in
-      # data/plugins/.
-      HANGAR_PROJECTS: |
-        CORE/CoreProtect:23.1:PAPER
+      # CoreProtect — anti-grief audit log, MANDATORY per ADR-0010.
+      # Not installed via env var: Modrinth's coreprotect entry stops at
+      # 1.21.9, Hangar's `download` API blocks programmatic GETs with HTTP 403
+      # (JWT auth required), and api.spiget.org is unreliable.
+      # Operational install: download CoreProtect-X.Y.Z.jar from
+      # https://hangar.papermc.io/CORE/CoreProtect → drop into data/plugins/
+      # → restart the mc service. The image picks up loose JARs automatically.
 
       # — Auto-pause when nobody's online (saves CPU) —
       ENABLE_AUTOPAUSE: "true"
