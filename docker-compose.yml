@@ -170,7 +170,7 @@ services:
   # playit.gg tunnel agent
   # ───────────────────────────────────────────────────────────────────────────
   playit:
-    image: ghcr.io/playit-cloud/playit-agent:0.16
+    image: ghcr.io/playit-cloud/playit-agent:0.17
     container_name: meteoriccraft-tunnel
     restart: unless-stopped
 
