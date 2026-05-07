@@ -134,7 +134,12 @@ services:
         https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
         https://ci.lucko.me/job/spark/lastSuccessfulBuild/artifact/spark-paper/build/libs/spark-1.10.172-paper.jar
 
-      # Modrinth-sourced plugins (auto-resolve compatible versions):
+      # Modrinth-sourced plugins (auto-resolve compatible versions).
+      # Groups (inline `#` would be parsed as a slug — comment outside the
+      # block scalar instead):
+      #   1-9: cross-version compat, perms, world tools, web map, multiworld, discord
+      #   10-13: economy/progression gameplay (Merric's spec, ADR-0010)
+      #   14: visual polish
       MODRINTH_PROJECTS: |
         viaversion
         viabackwards
@@ -145,14 +150,10 @@ services:
         squaremap
         multiverse-core
         discordsrv
-
-        # — Economy / progression gameplay (per Merric's spec, ADR-0010) —
         crazycrates
         quickshop-hikari
         ndailyrewards
         anti_combatlog
-
-        # — Visual polish —
         tab-was-taken
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
 
