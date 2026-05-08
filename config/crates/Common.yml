@@ -1,0 +1,75 @@
+Crate:
+  CrateType: CSGO
+  Name: '&a&lCommon Crate'
+  Preview-Name: '&a&lCommon Rewards'
+  PhysicalKey:
+    Name: '&a&lCommon Key'
+    Lore:
+      - '&7A key to the Common Crate.'
+      - '&7Right-click a Common Crate to open.'
+    Item: TRIPWIRE_HOOK
+    Glowing: true
+  StartingKeys: 0
+  OpeningBroadcast: false
+  Hologram:
+    Toggle: true
+    Height: 1.2
+    Message:
+      - '&a&lCommon Crate'
+      - '&7Right-click with key'
+  CrateOpenSound:
+    Enabled: true
+    Sound: BLOCK_NOTE_BLOCK_PLING
+    Volume: 1.0
+    Pitch: 1.0
+  StopWinSound:
+    Enabled: true
+    Sound: ENTITY_PLAYER_LEVELUP
+    Volume: 1.0
+    Pitch: 1.0
+  Prizes:
+    '1':
+      DisplayName: '&fLoaf of Bread'
+      DisplayItem: BREAD
+      DisplayAmount: 8
+      MaxRange: 100
+      Chance: 35
+      Items:
+        - 'Item:BREAD, Amount:8'
+    '2':
+      DisplayName: '&fCooked Beef'
+      DisplayItem: COOKED_BEEF
+      DisplayAmount: 6
+      MaxRange: 100
+      Chance: 25
+      Items:
+        - 'Item:COOKED_BEEF, Amount:6'
+    '3':
+      DisplayName: '&aIron Ingots'
+      DisplayItem: IRON_INGOT
+      DisplayAmount: 4
+      MaxRange: 100
+      Chance: 18
+      Items:
+        - 'Item:IRON_INGOT, Amount:4'
+    '4':
+      DisplayName: '&fStone Pickaxe'
+      DisplayItem: STONE_PICKAXE
+      MaxRange: 100
+      Chance: 12
+      Items:
+        - 'Item:STONE_PICKAXE, Amount:1'
+    '5':
+      DisplayName: '&e$25'
+      DisplayItem: GOLD_NUGGET
+      MaxRange: 100
+      Chance: 8
+      Commands:
+        - 'eco give %player% 25'
+    '6':
+      DisplayName: '&e$75'
+      DisplayItem: GOLD_INGOT
+      MaxRange: 100
+      Chance: 2
+      Commands:
+        - 'eco give %player% 75'

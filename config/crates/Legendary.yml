@@ -1,0 +1,88 @@
+Crate:
+  CrateType: CSGO
+  Name: '&6&lLegendary Crate'
+  Preview-Name: '&6&lLegendary Rewards'
+  PhysicalKey:
+    Name: '&6&lLegendary Key'
+    Lore:
+      - '&7A key to the Legendary Crate.'
+      - '&7Use wisely.'
+    Item: TRIPWIRE_HOOK
+    Glowing: true
+  StartingKeys: 0
+  OpeningBroadcast: true
+  Hologram:
+    Toggle: true
+    Height: 1.4
+    Message:
+      - '&6&lLegendary Crate'
+      - '&e&lTop tier rewards'
+  CrateOpenSound:
+    Enabled: true
+    Sound: UI_TOAST_CHALLENGE_COMPLETE
+    Volume: 1.0
+    Pitch: 0.8
+  StopWinSound:
+    Enabled: true
+    Sound: ENTITY_ENDER_DRAGON_GROWL
+    Volume: 0.6
+    Pitch: 1.4
+  Prizes:
+    '1':
+      DisplayName: '&6Diamond Block'
+      DisplayItem: DIAMOND_BLOCK
+      DisplayAmount: 2
+      MaxRange: 100
+      Chance: 28
+      Items:
+        - 'Item:DIAMOND_BLOCK, Amount:2'
+    '2':
+      DisplayName: '&6Netherite Ingot'
+      DisplayItem: NETHERITE_INGOT
+      MaxRange: 100
+      Chance: 20
+      Items:
+        - 'Item:NETHERITE_INGOT, Amount:1'
+    '3':
+      DisplayName: '&6Totem of Undying'
+      DisplayItem: TOTEM_OF_UNDYING
+      MaxRange: 100
+      Chance: 15
+      Items:
+        - 'Item:TOTEM_OF_UNDYING, Amount:1'
+    '4':
+      DisplayName: '&6Enchanted Netherite Sword'
+      DisplayItem: NETHERITE_SWORD
+      MaxRange: 100
+      Chance: 12
+      Items:
+        - 'Item:NETHERITE_SWORD, Amount:1, Name:&6&lLegendary Blade, Sharpness:5, Unbreaking:3, Looting:3'
+    '5':
+      DisplayName: '&6Enchanted Netherite Chestplate'
+      DisplayItem: NETHERITE_CHESTPLATE
+      MaxRange: 100
+      Chance: 10
+      Items:
+        - 'Item:NETHERITE_CHESTPLATE, Amount:1, Protection:4, Unbreaking:3, Mending:1'
+    '6':
+      DisplayName: '&e$2500'
+      DisplayItem: GOLD_BLOCK
+      DisplayAmount: 4
+      MaxRange: 100
+      Chance: 9
+      Commands:
+        - 'eco give %player% 2500'
+    '7':
+      DisplayName: '&6Beacon'
+      DisplayItem: BEACON
+      MaxRange: 100
+      Chance: 5
+      Items:
+        - 'Item:BEACON, Amount:1'
+    '8':
+      DisplayName: '&d&lElytra'
+      DisplayItem: ELYTRA
+      MaxRange: 100
+      Chance: 1
+      Items:
+        - 'Item:ELYTRA, Amount:1, Unbreaking:3'

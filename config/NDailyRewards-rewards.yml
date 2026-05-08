@@ -1,0 +1,68 @@
+rewards:
+  '1':
+    display:
+      material: BREAD
+      name: '&aDay 1 &7- &fStarter'
+      lore:
+        - '&7$50 + bread to get going.'
+    commands:
+      - 'eco give %player% 50'
+      - 'give %player% bread 4'
+  '2':
+    display:
+      material: IRON_INGOT
+      name: '&aDay 2 &7- &fIron Up'
+      lore:
+        - '&7$100 + iron ingots.'
+    commands:
+      - 'eco give %player% 100'
+      - 'give %player% iron_ingot 8'
+  '3':
+    display:
+      material: TRIPWIRE_HOOK
+      name: '&aDay 3 &7- &fCommon Key'
+      lore:
+        - '&7$150 + 1 Common Key.'
+    commands:
+      - 'eco give %player% 150'
+      - 'crazycrates givekey %player% Common 1'
+  '4':
+    display:
+      material: DIAMOND
+      name: '&bDay 4 &7- &fDiamonds'
+      lore:
+        - '&7$250 + diamonds.'
+    commands:
+      - 'eco give %player% 250'
+      - 'give %player% diamond 4'
+  '5':
+    display:
+      material: TRIPWIRE_HOOK
+      name: '&bDay 5 &7- &fRare Key'
+      lore:
+        - '&7$400 + 1 Rare Key.'
+    commands:
+      - 'eco give %player% 400'
+      - 'crazycrates givekey %player% Rare 1'
+  '6':
+    display:
+      material: EXPERIENCE_BOTTLE
+      name: '&bDay 6 &7- &fXP Boost'
+      lore:
+        - '&7$600 + XP bottles.'
+    commands:
+      - 'eco give %player% 600'
+      - 'give %player% experience_bottle 32'
+  '7':
+    display:
+      material: NETHERITE_INGOT
+      name: '&6Day 7 &7- &lJackpot'
+      lore:
+        - '&7$1500 + 1 Legendary Key.'
+    commands:
+      - 'eco give %player% 1500'
+      - 'crazycrates givekey %player% Legendary 1'
+settings:
+  cycle: true
+  reset-on-miss: false
+  timezone: 'UTC'

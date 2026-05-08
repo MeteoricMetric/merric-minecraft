@@ -1,0 +1,79 @@
+Crate:
+  CrateType: CSGO
+  Name: '&b&lRare Crate'
+  Preview-Name: '&b&lRare Rewards'
+  PhysicalKey:
+    Name: '&b&lRare Key'
+    Lore:
+      - '&7A key to the Rare Crate.'
+    Item: TRIPWIRE_HOOK
+    Glowing: true
+  StartingKeys: 0
+  OpeningBroadcast: true
+  Hologram:
+    Toggle: true
+    Height: 1.2
+    Message:
+      - '&b&lRare Crate'
+  CrateOpenSound:
+    Enabled: true
+    Sound: BLOCK_BEACON_ACTIVATE
+    Volume: 1.0
+    Pitch: 1.2
+  StopWinSound:
+    Enabled: true
+    Sound: UI_TOAST_CHALLENGE_COMPLETE
+    Volume: 1.0
+    Pitch: 1.0
+  Prizes:
+    '1':
+      DisplayName: '&bDiamonds'
+      DisplayItem: DIAMOND
+      DisplayAmount: 4
+      MaxRange: 100
+      Chance: 30
+      Items:
+        - 'Item:DIAMOND, Amount:4'
+    '2':
+      DisplayName: '&bEnchanted Iron Sword'
+      DisplayItem: IRON_SWORD
+      MaxRange: 100
+      Chance: 20
+      Items:
+        - 'Item:IRON_SWORD, Amount:1, Name:&bRare Blade, Sharpness:3, Unbreaking:2'
+    '3':
+      DisplayName: '&bEnchanted Iron Chestplate'
+      DisplayItem: IRON_CHESTPLATE
+      MaxRange: 100
+      Chance: 18
+      Items:
+        - 'Item:IRON_CHESTPLATE, Amount:1, Protection:3, Unbreaking:2'
+    '4':
+      DisplayName: '&bDiamond Pickaxe'
+      DisplayItem: DIAMOND_PICKAXE
+      MaxRange: 100
+      Chance: 12
+      Items:
+        - 'Item:DIAMOND_PICKAXE, Amount:1, Efficiency:3, Unbreaking:2'
+    '5':
+      DisplayName: '&eExperience Bottles'
+      DisplayItem: EXPERIENCE_BOTTLE
+      DisplayAmount: 16
+      MaxRange: 100
+      Chance: 10
+      Items:
+        - 'Item:EXPERIENCE_BOTTLE, Amount:16'
+    '6':
+      DisplayName: '&e$300'
+      DisplayItem: EMERALD
+      MaxRange: 100
+      Chance: 8
+      Commands:
+        - 'eco give %player% 300'
+    '7':
+      DisplayName: '&e$750'
+      DisplayItem: EMERALD_BLOCK
+      MaxRange: 100
+      Chance: 2
+      Commands:
+        - 'eco give %player% 750'
