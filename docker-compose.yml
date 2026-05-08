@@ -162,6 +162,9 @@ services:
         tab-was-taken
         decentholograms
         auraskills
+        duels
+        auctionhouseplus
+        villagershop
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
 
       # CoreProtect — anti-grief audit log, MANDATORY per ADR-0010.
