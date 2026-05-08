@@ -18,7 +18,7 @@ This repo inherits the operating principles from `merricstrough.com/CLAUDE.md` S
 
 - **First-principles thinking** → don't add plugins because "people use them"; add them when there's a real need
 - **Ruthless prioritization** → ship a working server first; add nice-to-haves only after Tier-1 (cross-play + ops + backups) is solid
-- **Paranoid security** → home IP never exposed, RCON localhost-only, secrets gitignored, whitelist on by default
+- **Paranoid security** → home IP never exposed, RCON localhost-only, secrets gitignored, perimeter or compensating-controls (per server-format ADR) enforced
 - **Documentation as deliverable** → every config decision lives in this repo or in an ADR; nothing is tribal knowledge
 - **Teach while building** → ops scripts are designed for Merric to read, understand, and eventually modify
 
@@ -51,7 +51,7 @@ Inherited from `merricstrough.com/CLAUDE.md` Section 5, with additions:
 
 - **No public ports without playit** — never `0.0.0.0:25565` or unspecified host binding
 - **RCON port localhost only** — `127.0.0.1:25575:25575/tcp`, never exposed
-- **`ENFORCE_WHITELIST=true` is non-negotiable in production** — turning it off requires explicit owner approval
+- **`ENFORCE_WHITELIST` posture is set by ADR** — the current value (per `docs/decisions/ADR-0010`) is `false`, paired with mandatory compensating controls (CoreProtect, spawn protection, anti-combat-log, Discord moderation). Changing the posture in either direction requires a new ADR superseding the current one
 - **`ONLINE_MODE=false` is required for Floodgate** — but mitigated by whitelist + Floodgate auth
 - **Plugin URLs pinned where possible** — direct GitHub release URLs over "latest" links for security-critical plugins
 - **Secrets handling**:

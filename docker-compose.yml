@@ -102,7 +102,11 @@ services:
       ENFORCE_SECURE_PROFILE: "false"
 
       # — Whitelist (CRITICAL — keep this on) —
-      ENFORCE_WHITELIST: "true"
+      # Per ADR-0010: this is "false" because the public economy-survival
+      # format trades whitelist gating for compensating controls (CoreProtect
+      # rollback, anti-combat-log, spawn protection, active moderation,
+      # Discord adult monitoring). Re-enable IFF those mitigations lapse.
+      ENFORCE_WHITELIST: "false"
       WHITELIST: "${WHITELIST}"
       OPS: "${OPS}"
 

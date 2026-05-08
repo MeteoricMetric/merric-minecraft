@@ -15,7 +15,7 @@
 
 1. **Default closed.** When a data-exposure decision is unclear, the answer is "do not expose." Add later, never roll back.
 2. **Operator safety over server features.** A cool feature that requires exposing a minor's identifying data does not get shipped. Period.
-3. **The whitelist is the perimeter.** The server stays whitelist-only by default. Public discoverability is a separate, deliberate decision with a different threat model.
+3. **Either a perimeter OR compensating controls — never neither.** The server can run in whitelist-gated mode (perimeter) OR in public-economy mode (compensating controls: CoreProtect rollback, anti-combat-log, spawn protection, active moderation, Discord monitoring). Which mode is in effect is documented in the most recent ADR governing server format. Running with neither — public AND no compensating controls — is not acceptable.
 4. **The website is the public face. The server is private infrastructure.** Cross-references between the two should be intentional and minimal.
 5. **Parent override always wins.** Shane has unilateral authority to remove content, ban users, take the server offline, or change any policy at any time, with no procedural delay.
 
@@ -230,22 +230,22 @@ If a player tells Merric "someone said/did something serious":
 
 ## 6. Public-discoverability decision
 
-The current state of MeteoricCraft is **whitelist-only, friends-only, not publicly advertised**. This means:
+The current state of MeteoricCraft is **public-joinable economy survival, friend-of-friend organic growth, not yet advertised on server-list sites** (per [ADR-0010](decisions/ADR-0010-public-economy-server-format.md)). This means:
 
-- ✅ The status widget on `/minecraft` is fine — strangers seeing "MeteoricCraft is online" doesn't enable them to join
-- ✅ The website link to the project is fine — same logic
-- ✅ Sharing the connection address in private Discords is fine
-- ❌ Posting the address publicly on social media triggers a re-evaluation
-- ❌ Streaming the server publicly without anonymizing usernames triggers a re-evaluation
+- ✅ The status widget on `/minecraft` is fine — strangers seeing "MeteoricCraft is online" can connect; the compensating controls handle that
+- ✅ The website link to the project is fine
+- ✅ Sharing the connection address openly with friends is fine; they can share with their friends
+- ⚠️ Listing on minecraft-server-list.com / planetminecraft.com / similar is **gated on completing the ADR-0010 mitigations**: DiscordSRV with adult-monitored channel, working CoreProtect rollback verified by drill, written moderation policy in `docs/RUNBOOK.md`
+- ❌ Streaming the server publicly without anonymizing usernames triggers a re-evaluation (PII risk)
 
-If the project ever broadens to public discovery:
-1. Migrate the public join address to `play.meteoriccraft.com`
-2. Re-review the public/private data taxonomy
-3. Implement player-name redaction in any public visualization
-4. Establish a contact channel for join requests (form on website)
-5. Establish a moderation team (more than Merric + Shane)
-6. Consider whether AI moderation is required at that scale
-7. Update this policy with the new posture
+If/when the project advertises on server-list sites or grows beyond friend-of-friend:
+1. Verify all ADR-0010 mitigations are operational and recently exercised (rollback drill, moderation playbook)
+2. Re-review the public/private data taxonomy in §2 above
+3. Implement player-name redaction in any public visualization (BlueMap, scoreboard exports)
+4. Migrate the public join address to a clean vanity (e.g. `play.meteoriccraft.com`)
+5. Add a moderation team beyond Merric + Shane
+6. Consider whether AI/automated chat moderation is needed at that scale
+7. Supersede ADR-0010 with the new posture decision
 
 This is a Phase 5+ decision, possibly "never," depending on how Merric wants the project to grow.
 
