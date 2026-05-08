@@ -176,6 +176,10 @@ services:
       # → restart the mc service. The image picks up loose JARs automatically.
 
       # — Auto-pause when nobody's online (saves CPU) —
+      # Command blocks enabled — used for the RTP portal at spawn (/rtp on
+      # pressure-plate trigger) and any future redstone/cmd-block tricks.
+      ENABLE_COMMAND_BLOCK: "true"
+
       ENABLE_AUTOPAUSE: "true"
       AUTOPAUSE_TIMEOUT_EST: "3600"   # 1 hour idle before pause
       AUTOPAUSE_TIMEOUT_INIT: "600"   # wait 10 min after start before considering pause
