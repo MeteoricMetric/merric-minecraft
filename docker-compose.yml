@@ -161,6 +161,7 @@ services:
         anti_combatlog
         tab-was-taken
         decentholograms
+        auraskills
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
 
       # CoreProtect — anti-grief audit log, MANDATORY per ADR-0010.
