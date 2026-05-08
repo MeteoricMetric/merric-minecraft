@@ -1,0 +1,18 @@
+location: world,0,73,9
+display-range: 48
+update-range: 48
+update-interval: 20
+permission: ""
+flags:
+- ""
+facing: 0.0
+lines:
+  "1":
+    type: TEXT
+    content: "&b&l🎁 CRATES"
+  "2":
+    type: TEXT
+    content: "&7Right-click with key"
+  "3":
+    type: TEXT
+    content: "&8Common &7• &bRare &7• &6Legendary"

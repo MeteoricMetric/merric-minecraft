@@ -1,0 +1,18 @@
+location: world,-9,73,0
+display-range: 48
+update-range: 48
+update-interval: 20
+permission: ""
+flags:
+- ""
+facing: 0.0
+lines:
+  "1":
+    type: TEXT
+    content: "&d&l📅 DAILY REWARDS"
+  "2":
+    type: TEXT
+    content: "&7Type &d/dailyrewards"
+  "3":
+    type: TEXT
+    content: "&8Day 7 = Legendary Key"
