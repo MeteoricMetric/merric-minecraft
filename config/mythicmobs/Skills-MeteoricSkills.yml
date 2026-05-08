@@ -1,0 +1,36 @@
+CosmicBlast:
+  Skills:
+  - effect:sound{s=entity.creeper.primed;v=1;p=0.8} @self
+  - effect:particles{p=explosion_large;amount=3} @target
+  - damage{a=6;ignorearmor=false} @PlayersInRadius{r=3} @target
+  - effect:explosion{yield=0;blockdamage=false;fire=false} @target
+
+LavaSplash:
+  Skills:
+  - effect:sound{s=block.lava.pop;v=1;p=0.6} @self
+  - effect:particles{p=lava;amount=40;hS=2;vS=1} @self
+  - damage{a=8;element=FIRE} @PlayersInRadius{r=8}
+  - ignite{ticks=80} @PlayersInRadius{r=8}
+
+VoidLifesteal:
+  Skills:
+  - heal{amount=10} @self
+  - effect:particles{p=portal;amount=15} @self
+
+VoidTeleport:
+  Skills:
+  - effect:sound{s=entity.enderman.teleport;v=1;p=1} @self
+  - effect:particles{p=portal;amount=30} @self
+  - teleportto{coordinates="~target"} @self
+  - damage{a=4} @target
+
+SummonVoidAdds:
+  Skills:
+  - message{m="&5&lThe Void answers..."} @PlayersInRadius{r=30}
+  - summon{type=ZOMBIE;amount=4;radius=3} @self
+
+VoidEnrage:
+  Skills:
+  - message{m="&4&lThe Void Reaver enrages!"} @PlayersInRadius{r=40}
+  - potion{type=INCREASE_DAMAGE;duration=200;lvl=1} @self
+  - effect:particles{p=smoke_large;amount=50} @self

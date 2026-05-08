@@ -1,0 +1,21 @@
+CosmicKnightSpawn:
+  Type: CosmicKnight
+  Chance: 0.03
+  Priority: 1
+  Cooldown: 60
+  Conditions:
+  - timeofday IN{NIGHT}
+  - biome NOT IN{NETHER_WASTES,CRIMSON_FOREST,WARPED_FOREST,BASALT_DELTAS,SOUL_SAND_VALLEY,THE_END,END_HIGHLANDS,END_MIDLANDS,SMALL_END_ISLANDS,END_BARRENS}
+  - height >100
+  Action: REPLACE
+  VanillaType: SKELETON
+
+MagmaSentinelSpawn:
+  Type: MagmaSentinel
+  Chance: 0.10
+  Priority: 1
+  Cooldown: 120
+  Conditions:
+  - biome IN{NETHER_WASTES,CRIMSON_FOREST,WARPED_FOREST,BASALT_DELTAS,SOUL_SAND_VALLEY}
+  Action: REPLACE
+  VanillaType: BLAZE

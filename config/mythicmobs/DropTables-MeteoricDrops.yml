@@ -1,0 +1,19 @@
+# NOTE: CrazyCrates 5.x command is `crates give <physical|virtual> <CrateName> <amount> <player>`
+# Crate names are case-sensitive: Common / Rare / Legendary (matches the YAML files in plugins/CrazyCrates/crates/)
+CrazyCrateKeyCommon:
+  Items:
+  - 'command{c="crates give physical Common 1 <player.name>";asplayer=false} 1 1'
+
+CrazyCrateKeyRare:
+  Items:
+  - 'command{c="crates give physical Rare 1 <player.name>";asplayer=false} 1 1'
+
+CrazyCrateKeyLegendary:
+  Items:
+  - 'command{c="crates give physical Legendary 1 <player.name>";asplayer=false} 1 1'
+
+VoidEnchantedDrop:
+  Items:
+  - DIAMOND_SWORD{enchantments=[{enchant=SHARPNESS;level=4},{enchant=UNBREAKING;level=3}]} 1 0.5
+  - DIAMOND_CHESTPLATE{enchantments=[{enchant=PROTECTION;level=4},{enchant=UNBREAKING;level=3}]} 1 0.3
+  - ENCHANTED_GOLDEN_APPLE 1-2 0.2

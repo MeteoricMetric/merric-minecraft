@@ -1,0 +1,33 @@
+GriefPrevention:
+  Claims:
+    Mode:
+      world: Survival
+      world_nether: Disabled
+      world_the_end: Disabled
+
+    InitialBlocks: 100
+    BlocksAccruedPerHour: 100
+    MaxAccruedBlocks: 5000
+
+    MinimumSize: 25
+    MinimumWidth: 5
+
+    AutomaticNewPlayerClaimsRadius: 4
+
+    ModificationTool: GOLDEN_SHOVEL
+    InvestigationTool: STICK
+
+    ProtectFromPvP: true
+    PvP:
+      ProtectPlayersInLandClaims:
+        PlayersInPvPCombat: false
+        InPvEWorlds: true
+
+  PvP:
+    RulesEnabledInWorld:
+      world: true
+      world_nether: false
+      world_the_end: false
+
+  AdminsGetWhispers: true
+  AdminsGetSignNotifications: true

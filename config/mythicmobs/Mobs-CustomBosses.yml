@@ -1,0 +1,90 @@
+CosmicKnight:
+  Type: SKELETON
+  Display: '&b&lCosmic Knight'
+  Health: 1500
+  Damage: 8
+  Armor: 6
+  MovementSpeed: 0.28
+  Faction: cosmic
+  Equipment:
+  - IRON_HELMET HEAD
+  - IRON_CHESTPLATE CHEST
+  - IRON_LEGGINGS LEGS
+  - IRON_BOOTS FEET
+  - BOW HAND
+  Options:
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    Silent: false
+    KnockbackResistance: 0.5
+  Modules:
+    ThreatTable: true
+  Skills:
+  - skill{s=CosmicBlast} @target ~onTimer:200 ?targetinrange{r=20}
+  - message{m="&b&lThe Cosmic Knight has fallen!"} @PlayersInRadius{r=40} ~onDeath
+  Drops:
+  - IRON_INGOT 2-4 1
+  - BONE 1-3 0.8
+  - EXPERIENCE 50 1
+  - CrazyCrateKeyCommon 1 1
+
+MagmaSentinel:
+  Type: BLAZE
+  Display: '&6&lMagma Sentinel'
+  Health: 5000
+  Damage: 14
+  Armor: 8
+  Faction: magma
+  Options:
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 0.8
+    Silent: false
+  Modules:
+    ThreatTable: true
+  Skills:
+  - skill{s=LavaSplash} @PlayersInRadius{r=10} ~onTimer:300
+  - potion{type=FIRE_RESISTANCE;duration=999999;lvl=1} @self ~onSpawn
+  - message{m="&6&lThe Magma Sentinel is defeated!"} @PlayersInRadius{r=40} ~onDeath
+  Drops:
+  - MAGMA_BLOCK 5 1
+  - FIRE_CHARGE 1-2 0.5
+  - BLAZE_ROD 2-4 1
+  - EXPERIENCE 200 1
+  - CrazyCrateKeyRare 1 1
+
+VoidReaver:
+  Type: WITHER_SKELETON
+  Display: '&5&lVoid Reaver'
+  Health: 12000
+  Damage: 22
+  Armor: 12
+  MovementSpeed: 0.3
+  Faction: void
+  Equipment:
+  - END_ROD HAND
+  - NETHERITE_HELMET HEAD
+  - NETHERITE_CHESTPLATE CHEST
+  Options:
+    PreventOtherDrops: true
+    PreventRandomEquipment: true
+    Despawn: false
+    KnockbackResistance: 1.0
+    Silent: false
+    AlwaysShowName: true
+  Modules:
+    ThreatTable: true
+  Skills:
+  - skill{s=VoidLifesteal} @target ~onAttack
+  - skill{s=VoidTeleport} @target ~onTimer:160 ?targetinrange{r=25}
+  - skill{s=SummonVoidAdds} @self ~onTimer:400 ?~health.percent{m=<75}
+  - skill{s=VoidEnrage} @self ~onTimer:100 ?~health.percent{m=<25}
+  - message{m="&5&lThe Void Reaver has been banished!"} @PlayersInRadius{r=60} ~onDeath
+  - effect:lightning @self ~onDeath
+  Drops:
+  - NETHERITE_INGOT 1 1
+  - VoidEnchantedDrop 1 0.5
+  - EXPERIENCE 1000 1
+  - CrazyCrateKeyLegendary 1 1
