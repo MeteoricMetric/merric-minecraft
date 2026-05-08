@@ -1,0 +1,24 @@
+# plugins/Duels/arenas.yml — single arena at (100, 70, 100)
+arenas:
+  stone-brick-1:
+    disabled: false
+    bound:
+      world: world
+      min: {x: 89, y: 65, z: 89}
+      max: {x: 111, y: 85, z: 111}
+    positions:
+      1:
+        world: world
+        x: 95.5
+        y: 70.0
+        z: 100.5
+        yaw: -90.0
+        pitch: 0.0
+      2:
+        world: world
+        x: 105.5
+        y: 70.0
+        z: 100.5
+        yaw: 90.0
+        pitch: 0.0
+    kits: ["balanced"]

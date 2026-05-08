@@ -1,0 +1,13 @@
+# plugins/Essentials/kits/welcome.yml
+# One-time starter kit for new arrivals.
+# Permission: essentials.kits.welcome (granted to default group via LP)
+welcome:
+  cooldown: -1
+  items:
+    - writtenbook 1 title:&6&lWelcome author:Merric book:welcome_book
+    - compass 1 name:&6Spawn_Compass lore:Right-click_to_check_bearings
+    - bread 16
+    - torch 32
+    - oak_planks 32
+  effects:
+    - saturation 60 1

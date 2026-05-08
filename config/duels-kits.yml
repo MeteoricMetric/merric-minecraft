@@ -1,0 +1,13 @@
+# plugins/Duels/kits.yml — balanced 1v1 starter kit
+kits:
+  balanced:
+    items:
+      0: {type: IRON_SWORD, enchants: {SHARPNESS: 2}, unbreakable: true}
+      8: {type: GOLDEN_APPLE, amount: 1}
+      9: {type: COOKED_BEEF, amount: 5}
+    armor:
+      helmet: {type: IRON_HELMET, unbreakable: true}
+      chestplate: {type: IRON_CHESTPLATE, unbreakable: true}
+      leggings: {type: IRON_LEGGINGS, unbreakable: true}
+      boots: {type: IRON_BOOTS, unbreakable: true}
+    icon: {type: IRON_SWORD}

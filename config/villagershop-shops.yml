@@ -1,0 +1,50 @@
+# plugins/VillagerShop/shops.yml — 3 admin merchants at spawn north edge
+shops:
+  builder:
+    displayName: "&6The Builder"
+    type: ADMIN
+    location: "world,-3.5,70,-18.5,180,0"
+    profession: MASON
+    villagerLevel: 2
+    items:
+      0: { item: OAK_PLANKS,    amount: 64, buyPrice: 1.00,  sellPrice: -1, mode: ITRADE }
+      1: { item: SPRUCE_PLANKS, amount: 64, buyPrice: 1.00,  sellPrice: -1, mode: ITRADE }
+      2: { item: COBBLESTONE,   amount: 64, buyPrice: 0.75,  sellPrice: -1, mode: ITRADE }
+      3: { item: STONE_BRICKS,  amount: 64, buyPrice: 1.50,  sellPrice: -1, mode: ITRADE }
+      4: { item: GLASS,         amount: 64, buyPrice: 2.00,  sellPrice: -1, mode: ITRADE }
+      5: { item: DIRT,          amount: 64, buyPrice: 0.50,  sellPrice: -1, mode: ITRADE }
+      6: { item: SAND,          amount: 64, buyPrice: 1.00,  sellPrice: -1, mode: ITRADE }
+
+  smith:
+    displayName: "&cThe Smith"
+    type: ADMIN
+    location: "world,0.5,70,-18.5,180,0"
+    profession: WEAPONSMITH
+    villagerLevel: 3
+    items:
+      0: { item: STONE_PICKAXE, amount: 1, buyPrice: 8.00,   sellPrice: -1, mode: ITRADE }
+      1: { item: STONE_AXE,     amount: 1, buyPrice: 8.00,   sellPrice: -1, mode: ITRADE }
+      2: { item: STONE_SWORD,   amount: 1, buyPrice: 6.00,   sellPrice: -1, mode: ITRADE }
+      3: { item: IRON_PICKAXE,  amount: 1, buyPrice: 40.00,  sellPrice: -1, mode: ITRADE }
+      4: { item: IRON_SWORD,    amount: 1, buyPrice: 35.00,  sellPrice: -1, mode: ITRADE }
+      5: { item: SHIELD,        amount: 1, buyPrice: 15.00,  sellPrice: -1, mode: ITRADE }
+      6: { item: RAW_IRON,      amount: 1, buyPrice: -1,     sellPrice: 1.50, mode: ITRADE }
+      7: { item: RAW_GOLD,      amount: 1, buyPrice: -1,     sellPrice: 2.50, mode: ITRADE }
+      8: { item: RAW_COPPER,    amount: 1, buyPrice: -1,     sellPrice: 0.40, mode: ITRADE }
+      9: { item: COAL,          amount: 1, buyPrice: -1,     sellPrice: 0.30, mode: ITRADE }
+
+  cook:
+    displayName: "&aThe Cook"
+    type: ADMIN
+    location: "world,3.5,70,-18.5,180,0"
+    profession: BUTCHER
+    villagerLevel: 2
+    items:
+      0: { item: BREAD,         amount: 1, buyPrice: 1.00,  sellPrice: -1, mode: ITRADE }
+      1: { item: COOKED_BEEF,   amount: 1, buyPrice: 2.00,  sellPrice: -1, mode: ITRADE }
+      2: { item: GOLDEN_CARROT, amount: 1, buyPrice: 12.00, sellPrice: -1, mode: ITRADE }
+      3: { item: MILK_BUCKET,   amount: 1, buyPrice: 5.00,  sellPrice: -1, mode: ITRADE }
+      4: { item: WHEAT,         amount: 1, buyPrice: -1,    sellPrice: 0.20, mode: ITRADE }
+      5: { item: BEEF,          amount: 1, buyPrice: -1,    sellPrice: 0.50, mode: ITRADE }
+      6: { item: CHICKEN,       amount: 1, buyPrice: -1,    sellPrice: 0.40, mode: ITRADE }
+      7: { item: CARROT,        amount: 1, buyPrice: -1,    sellPrice: 0.25, mode: ITRADE }

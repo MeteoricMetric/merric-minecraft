@@ -1,0 +1,9 @@
+&6&lWelcome to MeteoricCraft\n\n&7A meteor cracked open\nthe sky and scattered\ncosmic shards across\nthis world.\n\n&fYou're standing on one\nof them.\n\n&8This is a survival\nserver with a slow-burn\ncosmic story. Build,\ntrade, fight, explore.\n\n&7Turn the page →
+#
+&6&lEssential Commands\n\n&e/spawn &7- back to spawn\n&e/sethome &7- save a spot\n&e/home &7- go there\n&e/rtp &7- random wild tp\n&e/tpa <name> &7- ask to tp\n&e/msg <name> &7- whisper\n&e/balance &7- your coins\n&e/shop &7- player shops\n&e/ah &7- auction house\n&e/duel <name> &7- pvp duel\n\n&8PvP is ON outside\nspawn. Stay frosty.
+#
+&6&lCrates & Skills\n\n&fCrate keys drop from:\n&7- daily rewards (/dr)\n&7- voting (soon)\n&7- events Merric runs\n\n&e/crates &7lists them.\n\n&6&lAuraSkills:\n&fLevel up by playing.\n\n&7Mining, Farming,\nFighting, Archery,\nForaging, Fishing,\nAlchemy, Enchanting,\nDefense, Agility.\n\n&e/sk &7opens the menu.
+#
+&6&lRules\n\n&f1. &7Be cool. No slurs,\nno bullying, no creepy\nDMs. Ever.\n\n&f2. &7Ask before taking\nfrom chests that aren't\nyours. Stealing = ban.\n\n&f3. &7Griefing claimed\nbuilds = ban.\n\n&f4. &7Cheats/x-ray = ban.\n\n&f5. &7No /report yet —\nDM &eMerricMetric&7 on\nDiscord if something's\nwrong.
+#
+&6&lCredits\n\n&fBuilt by &eMerric &f(13)\nwith help from his dad\n&eShane&f.\n\n&7Paper 1.21.11 +\nGeyser/Floodgate so\nBedrock friends can\njoin too.\n\n&8Have fun. Don't be\na jerk. Build something\nweird.\n\n&6&l~ MeteoricCraft ~
