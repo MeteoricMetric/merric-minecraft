@@ -169,6 +169,7 @@ services:
         griefprevention
         bluemap
         placeholderapi
+        votespeed
       MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
 
       # CoreProtect — anti-grief audit log, MANDATORY per ADR-0010.
