@@ -138,6 +138,7 @@ services:
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar
         https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsX-2.21.2.jar
+        https://github.com/EssentialsX/Essentials/releases/download/2.21.2/EssentialsXSpawn-2.21.2.jar
 
       # Modrinth-sourced plugins (auto-resolve compatible versions).
       # Groups (inline `#` would be parsed as a slug — comment outside the
