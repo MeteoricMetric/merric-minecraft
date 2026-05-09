@@ -114,13 +114,27 @@ When Merric is sitting at the keyboard for ops work:
 5. **When something breaks**, ask "what changed?" before "let me fix it." That's the actual debugging skill.
 6. **Celebrate working systems out loud.** "The server's been up for 3 days. That's because the healthcheck restart policy worked. You wrote that."
 
+## Live plugin manifest (31 plugins as of v1.3)
+
+Source-of-truth: `docker-compose.yml` `PLUGINS` (direct URLs) + `MODRINTH_PROJECTS`. Direct-URL plugins are pinned for reproducibility; Modrinth ones auto-resolve to the latest 1.21.11-compatible build.
+
+**Direct URLs (5)** — Geyser, Floodgate (cross-play), Vault (1.7.3), EssentialsX core (2.21.2), EssentialsXSpawn (2.21.2). CoreProtect (23.1) is also a direct manual JAR drop into `data/plugins/` (no working programmatic source yet).
+
+**Modrinth (24)** — viaversion, viabackwards, luckperms, worldedit, worldguard, chunky, squaremap, multiverse-core, discordsrv, crazycrates, quickshop-hikari, ndailyrewards, anti_combatlog, tab-was-taken, decentholograms, auraskills, duels, auctionhouseplus, villagershop, mythicmobs, griefprevention, bluemap, placeholderapi, votespeed, simplertp.
+
+**Paper-bundled (1)** — spark (Paper 1.21.11+ ships it natively; do NOT install separately or you get a remap conflict).
+
+Plugin governance + tier classification: `docs/PLUGIN-GOVERNANCE.md`.
+
 ## Cross-references
 
 - Master CLAUDE.md (sets all conventions): https://github.com/MeteoricMetric/meteoricmetric.github.io/blob/main/CLAUDE.md
 - **Operational policy docs in this repo:**
-  - `docs/RUNBOOK.md` — change-management ladder, common incidents, restore drills
-  - `docs/PLUGIN-GOVERNANCE.md` — approved sources, manifest, install/update/remove
+  - `docs/RUNBOOK.md` — change-management ladder, common incidents, restore drills, custom-boss commands, crate-key issuance, GriefPrevention claim flow
+  - `docs/PLUGIN-GOVERNANCE.md` — approved sources, full plugin manifest, install/update/remove
   - `docs/CHILD-SAFETY-PRIVACY.md` — public/private taxonomy, identity, moderation
+  - `docs/MERRIC-OPS-MANUAL.md` — kid-readable day-to-day ops guide for Merric (admin commands, boss spawning, crate-key issuance, when-to-ask-Shane)
+  - `docs/PLAYER-GUIDE.md` — public player-facing guide for friends + their parents (how to connect, what to do, rules, a-note-for-parents). Suitable for republishing on `merricstrough.com/minecraft`.
 - **Architectural decisions:**
   - `docs/decisions/ADR-0004` — overall stack
   - `docs/decisions/ADR-0005` — network exposure (playit now, VPS later)
@@ -128,10 +142,12 @@ When Merric is sitting at the keyboard for ops work:
   - `docs/decisions/ADR-0007` — plugin governance
   - `docs/decisions/ADR-0008` — child-safety and privacy
   - `docs/decisions/ADR-0009` — status widget worker lives in website repo
+  - `docs/decisions/ADR-0010` — public economy-server format (replaces whitelist with compensating controls)
 - Status widget: implemented in the website repo's worker (`MeteoricMetric/MeteoricMetric.github.io` → `worker/src/minecraft.ts`). This repo does NOT contain widget code — see ADR-0009.
 
 ---
 
+*v1.3 — 2026-05-08 — Round-3-through-5 documentation pass: plugin manifest expanded to 31 (was 13 in v1.1); ADR-0010 (public economy server format) landed and now referenced inline; new docs MERRIC-OPS-MANUAL.md and PLAYER-GUIDE.md added; cross-references updated; CHANGELOG v1.3.0 records the build/config arc end-to-end.*
 *v1.2 — 2026-05-03 — ADR-0009 (status widget worker moved to website repo); CI + Dependabot landed; bootstrap session memory captured*
 *v1.1 — May 2026 — added policy docs (RUNBOOK, PLUGIN-GOVERNANCE, CHILD-SAFETY-PRIVACY) and ADRs 0005-0008*
 *v1.0 — initial creation*

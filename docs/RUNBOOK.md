@@ -4,7 +4,9 @@
 
 **Owner:** Shane Strough  
 **Operator:** Merric Strough (`MeteoricMetric`)  
-**Companion docs:** [CHILD-SAFETY-PRIVACY.md](CHILD-SAFETY-PRIVACY.md), [PLUGIN-GOVERNANCE.md](PLUGIN-GOVERNANCE.md)
+**Companion docs:** [CHILD-SAFETY-PRIVACY.md](CHILD-SAFETY-PRIVACY.md), [PLUGIN-GOVERNANCE.md](PLUGIN-GOVERNANCE.md), [MERRIC-OPS-MANUAL.md](MERRIC-OPS-MANUAL.md), [PLAYER-GUIDE.md](PLAYER-GUIDE.md)
+
+> Per [ADR-0010](decisions/ADR-0010-public-economy-server-format.md), the server is no longer whitelist-gated. Whitelist commands remain available for emergency lockdown only. Day-to-day moderation runs on CoreProtect rollback + anti-combat-log + GriefPrevention claims + dual-admin authority.
 
 ---
 
@@ -24,13 +26,15 @@ These are everyday operations with limited blast radius and easy recovery if som
 | Check status | `./scripts/ops.sh status` | Read-only |
 | Watch logs | `./scripts/ops.sh logs` | Read-only |
 | See who's online | `./scripts/ops.sh online` | Read-only |
-| Add a friend to whitelist | `./scripts/ops.sh whitelist <name>` | Reversible |
-| Remove from whitelist | `./scripts/ops.sh unwhitelist <name>` | Reversible — re-add anytime |
 | Run a manual backup | `./scripts/ops.sh backup` | Always safe, never harmful |
-| Kick a misbehaving player | `/kick <name> <reason>` (in console) | They can rejoin unless also unwhitelisted |
+| Kick a misbehaving player | `/kick <name> <reason>` | They can rejoin |
 | In-game commands as op | `/tp`, `/give`, `/gamemode`, `/time`, `/weather` | Affects only Merric's gameplay or limited scope |
+| Spawn a custom boss | `/mm spawn CosmicKnight 1` (or `MagmaSentinel`, `VoidReaver`) | MythicMobs; despawns after kill |
+| Issue a crate key | `/crates give physical <Tier> <amount> <player>` | Tier ∈ {Common, Rare, Legendary}; case-sensitive |
+| Inspect/rollback grief | `/co inspect`, `/co lookup u:<name> t:1d`, `/co rollback u:<name> t:1d r:50` | CoreProtect — see §2.5 |
 | Edit MOTD | Edit `MOTD=` in `.env` and restart | MOTD content reviewed per CHILD-SAFETY-PRIVACY.md §2.1 |
 | Edit server rules | Edit content; commit | Public-facing rules stay aligned with policy |
+| Emergency lockdown (whitelist on) | `/whitelist on` → `/whitelist add <trusted>` per name | Per ADR-0010: only during active incident; restore-state once resolved |
 
 ### 1.2 🟡 Safe with Dad nearby (do these together)
 
@@ -43,6 +47,9 @@ These have larger blast radius or interact with infrastructure beyond the game.
 | Change resource limits | Edit `deploy.resources` in compose | Could affect other workloads on the workstation |
 | Modify the LuckPerms permission tree | `/lp` commands | Easy to lock yourself out if mistyped |
 | Restore from backup | `./scripts/ops.sh restore` | Destructive — overwrites current world |
+| Re-tune a custom boss | Edit `data/plugins/MythicMobs/Mobs/CustomBosses.yml`, `/mm reload` | Bad numbers can make a boss un-killable or trivial |
+| Edit a crate's loot table | Edit `data/plugins/CrazyCrates/crates/<Tier>.yml`, `/crates reload` | Wrong syntax = crate breaks for everyone |
+| Adjust GriefPrevention defaults | Edit `data/plugins/GriefPrevention/config.yml` | Affects every claim — easy to lock players out of land |
 | Configure DiscordSRV | Edit `data/plugins/DiscordSRV/config.yml` | Privacy boundary (CHILD-SAFETY-PRIVACY.md §4) |
 | Change BlueMap settings | Edit BlueMap config | Privacy boundary (markers off, see §4) |
 | Pre-generate chunks | `/chunky start` | Long-running; affects performance |
@@ -200,6 +207,38 @@ This is 🟡 Tier — likely needs Shane.
 
 See CHILD-SAFETY-PRIVACY.md §5.5. Always tell Shane, even if it seems small.
 
+### 2.11 GriefPrevention: a player can't claim land or got stuck inside someone else's claim
+
+**"I can't claim — says I have no blocks":**
+- Check their balance: `/acb <player>` (admin-claim-blocks). New players get **100 starter blocks**, +100/hr playtime, capped at 5000.
+- Grant blocks if needed: `/acb <player> add 1000`
+- Verify they're holding the **golden shovel** (claim tool) when right-clicking the diagonal corners
+
+**"I'm trapped inside another player's claim":**
+- Tell them to use `/spawn` (always allowed, even from inside a claim)
+- If `/spawn` is blocked by a config bug: `/tp <player> <safe-coords>` from console, then file an issue
+
+**"They claimed land they shouldn't have / squatting near my base":**
+- Inspect: `/abandonclaim` requires standing inside it; admins can use `/adminclaims` to list
+- Last resort: `/deletclaim` while standing in it (admin-only). Tell the player first if at all possible — claim deletion is destructive to their work.
+
+### 2.12 Custom boss feels broken
+
+**Symptoms:** boss un-killable, boss instantly dies, boss not spawning naturally, abilities not firing.
+
+**Triage:**
+1. `/mm reload` — picks up any config edits without server restart
+2. Check `data/plugins/MythicMobs/Mobs/CustomBosses.yml` for syntax errors (YAML — indentation matters)
+3. Look at the server log for "Couldn't load mob X" lines after reload
+4. Spawn one manually with `/mm spawn <name> 1` and watch it — does it use abilities?
+
+**Common causes:**
+- Skill file (`Skills-MeteoricSkills.yml`) and Mob file out of sync — referenced skill name doesn't exist
+- Drop table reference broken — boss kills produce no loot
+- `Faction:` or `Type:` typos make the mob fail to register
+
+Re-tuning HP / damage / ability frequency = 🟡. Adding new bosses = 🟡 with PLUGIN-GOVERNANCE-style review.
+
 ---
 
 ## 3. Restore drills
@@ -218,6 +257,13 @@ A backup that's never been restored is not a backup. The drill catches:
 
 ### 3.3 Drill procedure
 
+**Environment variables (set on the host before running restic commands):**
+```bash
+export RESTIC_REPOSITORY=/mnt/<backup-volume>/minecraft-restic   # see CLAUDE.local.md for real path
+export RESTIC_PASSWORD_FILE=/home/<user>/.restic-password
+```
+The restic binary lives at `~/bin/restic` (no-sudo install); `~/.bashrc` puts it on `PATH`.
+
 1. **Don't restore over production.** Use a disposable directory.
 2. Pick a snapshot from `restic snapshots` — ideally a few days old (not the freshest)
 3. Restore to a sandbox path:
@@ -231,9 +277,9 @@ A backup that's never been restored is not a backup. The drill catches:
    - File timestamps are reasonable
 5. (Optional) Spin up a test container pointing at the restored data, on a different port:
    ```bash
-   # docker run --rm -it -e EULA=TRUE -p 25566:25565 -v /tmp/restore-drill-...:/data itzg/minecraft-server:java21
+   # docker run --rm -it -e EULA=TRUE -p 25566:25565 -v /tmp/restore-drill-...:/data itzg/minecraft-server:java25
    ```
-6. Connect, look at the world, verify spawn point + a known landmark
+6. Connect, look at the world, verify spawn point + a known landmark (the spawn meteor pillar at 0,100,0; the duels arena at 100,70,100)
 7. Tear down the test container
 8. `rm -rf /tmp/restore-drill-...`
 9. Record the drill outcome in `docs/audits/restore-drill-YYYY-MM-DD.md`
@@ -359,6 +405,7 @@ Every Sunday evening, alongside the website's weekly review:
 ## Changelog
 
 - **v1.0** (2026-05-02) — Initial creation as part of merric-minecraft v1.1.
+- **v1.1** (2026-05-09) — v1.3 stack alignment: removed whitelist add/remove rows (per ADR-0010); added boss-spawn / crate-key / CoreProtect rollback to 🟢 row; added boss-tune / crate-edit / GriefPrevention 🟡 rows; new incidents §2.11 (GriefPrevention) and §2.12 (broken boss); restore drill updated for `~/bin/restic` install and `java25` image; cross-refs to MERRIC-OPS-MANUAL and PLAYER-GUIDE.
 
 ---
 

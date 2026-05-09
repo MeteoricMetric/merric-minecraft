@@ -109,11 +109,48 @@ The authoritative list of plugins for MeteoricCraft v1.1:
 
 ### 3.5 Tier 5 — Watchlist (might be added later, deliberately)
 
-These are NOT in v1.1 but may be added with a deliberate decision:
+These are NOT yet installed but may be added with a deliberate decision:
 
 - **Simple Voice Chat** (Modrinth `voicechat`) — proximity voice. Privacy-sensitive, would update CHILD-SAFETY-PRIVACY.md before adding.
-- **squaremap** (alternative to BlueMap) — leaner web map; might swap if BlueMap proves heavy.
-- **GriefPrevention** — claim-based protection. Probably overkill for whitelist-only friend group.
+- **EcoEnchants** — custom enchantments. Not on Modrinth (SpigotMC-only); manual JAR drop is the install path. Considered v1.4+.
+- **Simple Pets / Cosmetics** plugins. Eye candy; defer until base economy proves engaging.
+
+### 3.6 Round 3-5 plugins (added v1.3 — gameplay expansion per ADR-0010)
+
+The shift to public economy-server format introduced these. All Modrinth-sourced and 1.21.11-verified at install time.
+
+| Plugin | Modrinth slug | Pin policy | Purpose | Tier-equivalent |
+|---|---|---|---|---|
+| **CrazyCrates** | `crazycrates` | Latest 5.x | 3-tier crate system (Common/Rare/Legendary), key-based loot | 3 |
+| **QuickShop-Hikari** | `quickshop-hikari` | Latest 6.x | Admin chest shops + player chest shops; primary economy storefront | 3 |
+| **NDailyRewards** | `ndailyrewards` | Latest 3.x | 7-day cycling login bonus; economy-themed (Day 7 = Legendary Key) | 3 |
+| **anti_combatlog** | `anti_combatlog` | Latest | Punishes combat logout — mandatory per ADR-0010 compensating-controls | 2 |
+| **TAB** | `tab-was-taken` | Latest 6.x | Branded tablist + scoreboard; uses PlaceholderAPI | 3 |
+| **AuraSkills** | `auraskills` | Latest 2.x | 11-skill RPG progression layer (mining, fighting, archery, fishing, etc.) | 3 |
+| **DecentHolograms** | `decentholograms` | Latest 2.x | Floating text labels at spawn (5 placed); cardinal-zone signposting | 3 |
+| **MythicMobs** | `mythicmobs` | Latest 5.x | Custom bosses + abilities + droptables; 3 bosses configured | 3 |
+| **GriefPrevention** | `griefprevention` | Latest 16.x | Chunk-claim land protection — mandatory per ADR-0010 | 2 |
+| **BlueMap** | `bluemap` | Latest 5.x | 3D web map of overworld; render-thread-count: 1 (co-tenant politeness) | 3 |
+| **PlaceholderAPI** | `placeholderapi` | Latest 2.x | Variable expansion in messages; required by TAB and others | 2 |
+| **Duels** | `duels` | Latest | 1v1 PvP duels with arena + kit system | 4 |
+| **AuctionHouse** | `auctionhouseplus` | Latest 3.x | Server-wide item auction marketplace | 4 |
+| **VillagerShop** | `villagershop` | Latest 1.x | Villager-NPC shop tool (interactive admin config; we use QuickShop for spawn shops, VillagerShop is held in reserve for player-driven NPC trades) | 4 |
+| **VoteSpeed** | `votespeed` | Latest 1.x | All-in-one voting (NuVotifier listener + rewards + VoteParty + Bedrock-Form support); needs vote-site URLs configured to receive vote callbacks | 4 |
+| **SimpleRTP** | `simplertp` | Latest 1.x | `/rtp` random teleport command (EssentialsX 2.21.2 has no native rtp) | 2 |
+| **EssentialsXSpawn** | direct URL @ 2.21.2 | Pinned | EssentialsX module: provides `/spawn` and `/setspawn` (core JAR doesn't ship them) | 2 |
+
+### 3.7 The 31-plugin runtime (v1.3 snapshot)
+
+```
+Direct URLs (5):  Geyser-Spigot, floodgate, Vault, EssentialsX (core), EssentialsXSpawn
+Manual JAR (1):   CoreProtect (Hangar download — no programmatic 1.21.11 source yet)
+Modrinth (24):    viaversion, viabackwards, luckperms, worldedit, worldguard, chunky,
+                  squaremap, multiverse-core, discordsrv,
+                  crazycrates, quickshop-hikari, ndailyrewards, anti_combatlog, tab-was-taken,
+                  auraskills, decentholograms, mythicmobs, griefprevention, bluemap, placeholderapi,
+                  duels, auctionhouseplus, villagershop, votespeed, simplertp
+Paper-bundled:    spark (do NOT install separately — remap conflict)
+```
 
 ---
 
