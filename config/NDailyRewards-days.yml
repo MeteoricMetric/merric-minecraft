@@ -87,5 +87,3 @@
         - "[console] crates give physical Legendary 1 <player>"
         - "[message] &6&l+$1500 &7and a &6&lLegendary Crate Key&7! Streak resets tomorrow."
         - "[sound] UI_TOAST_CHALLENGE_COMPLETE:1:0.8"
-        - "[title] &6&lJackpot!"
-        - "[subtitle] &eDay 7 streak claimed"
