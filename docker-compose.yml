@@ -184,6 +184,12 @@ services:
       # pressure-plate trigger) and any future redstone/cmd-block tricks.
       ENABLE_COMMAND_BLOCK: "true"
 
+      # Watchdog tolerance: 120s before crashing on slow ticks. Default is
+      # 60s; bumping to handle BlueMap-style background workloads on a
+      # co-tenant host. Above this, Paper still kills the server (good —
+      # something is genuinely wrong if a tick takes 2 min).
+      MAX_TICK_TIME: "120000"
+
       ENABLE_AUTOPAUSE: "true"
       AUTOPAUSE_TIMEOUT_EST: "3600"   # 1 hour idle before pause
       AUTOPAUSE_TIMEOUT_INIT: "600"   # wait 10 min after start before considering pause
