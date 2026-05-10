@@ -10,6 +10,10 @@
 # per master CLAUDE.md §15 redaction discipline
 CLAUDE.local.md
 
+# The Vault of Aerudin — secret in-world build, not part of the public player surface
+SECRET-CAVE-*.md
+/scripts/secret-cave/
+
 # Server data — too large for git, lives on disk
 data/
 backups/
