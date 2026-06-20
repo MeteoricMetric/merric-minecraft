@@ -26,7 +26,7 @@ Open Minecraft → Multiplayer → Direct Connect → paste the address → Join
 
 Open Minecraft → Servers tab → Add Server → fill in the address and port → Save → connect.
 
-**Console caveat:** Switch, Xbox, and PlayStation block custom server addresses by default. There's a one-time DNS workaround called **BedrockConnect** that fixes this (see footnote at the end).
+**Console caveat:** Switch, Xbox, and PlayStation block custom server addresses by default, so the server simply won't show up for you to add. **Easiest fix — connect from a phone, tablet, or Windows 10/11 PC instead;** those add a custom server normally (address + port above). If a console is all you've got, there's a DNS workaround called **BedrockConnect** (see the footnote at the end).
 
 ## What you'll see when you join
 
@@ -87,4 +87,9 @@ See you in the wilderness. Build something weird, fight something terrifying, an
 
 ---
 
-*Footnote — BedrockConnect for consoles:* Nintendo Switch, Xbox, and PlayStation block custom server addresses by default, but **BedrockConnect** is a free, well-known community workaround that lets you set your console's DNS to a public BedrockConnect server, after which "Featured Servers" becomes a list you can add `mc.merricstrough.com:47785` to. Search "BedrockConnect setup" plus your console name for current step-by-step instructions — the DNS addresses change occasionally, so the latest guide beats anything we'd hardcode here.
+*Footnote — getting a console (Switch / Xbox / PlayStation) connected:* Consoles block typing in a custom server address, so MeteoricCraft won't appear for you to add. Two ways around it:
+
+1. **Easiest — use a different device.** A phone, tablet, or Windows 10/11 PC running Bedrock adds the server normally (Servers → Add Server → `mc.merricstrough.com`, port `47785`). No workaround needed. If you have any of these, take this path.
+2. **Console — BedrockConnect (DNS workaround).** Set your console's network DNS to Manual, **Primary `104.238.130.180`, Secondary `8.8.8.8`**. Then launch Minecraft → **Servers** tab → tap *any* Featured Server (The Hive, Lifeboat, etc.). Instead of that server, a **BedrockConnect** menu opens — choose "Connect to a Server" and enter `mc.merricstrough.com`, port `47785`. You re-do the DNS step each session (consoles won't save a custom server), and a few home networks block the IP — if it won't load, use option 1. Current and regional IPs live at the project page: https://github.com/Pugmatt/BedrockConnect
+
+**Privacy note:** while that DNS is set, your console's lookups route through a community-run server. Switch the console's DNS back to **Automatic** when you're done playing.

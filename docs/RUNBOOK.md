@@ -134,15 +134,18 @@ Wait 60 seconds, copy the URL it prints. Open it — Spark shows what's eating C
 
 ### 2.4 Console player (Xbox / Switch / PS) can't connect
 
-Console Bedrock has additional friction (per CHILD-SAFETY-PRIVACY.md §3 noted limitation). It usually requires **BedrockConnect** as a workaround:
+Symptom is almost always "the server never shows up to add" — consoles block custom server addresses by default (per CHILD-SAFETY-PRIVACY.md §3 noted limitation). If Java or phone-Bedrock players are on, the server itself is fine; this is purely a console-client limitation. Two fixes, easiest first:
 
-1. Player goes to https://bedrockconnect.us — gets the DNS to use
-2. Player sets that DNS in their console network settings
-3. Player launches Minecraft, picks "Featured Servers"
-4. The BedrockConnect server appears in their list
-5. They join it, and use it to type our actual server address
+1. **Point them at a phone / tablet / PC.** A phone, tablet, or Windows 10/11 PC adds a custom server normally (Servers → Add Server → `mc.merricstrough.com` port `47785`). No DNS hacks, it saves to their list, most child-safe. Recommend this first — especially for kids.
+2. **Console — BedrockConnect DNS workaround:**
+   1. On the console, set Manual DNS → Primary `104.238.130.180`, Secondary `8.8.8.8`.
+   2. Launch Minecraft → **Servers** tab → tap *any* Featured Server (The Hive, Lifeboat, …). The DNS redirects it to a BedrockConnect menu.
+   3. In that menu: "Connect to a Server" → `mc.merricstrough.com`, port `47785`.
+   - The DNS step repeats each session (consoles won't save a custom server). Some networks block the IP — GeyserMC notes the main IP is "often blocked on consoles." If it won't load, fall back to option 1.
+   - Source of truth for current/regional IPs: https://github.com/Pugmatt/BedrockConnect — the old `https://bedrockconnect.us` site was unreachable as of 2026-06-09, but the public DNS at `104.238.130.180` was verified live and redirecting featured-server hostnames that day.
+   - Privacy: that DNS routes the console's lookups through a third party while set — revert to Automatic after playing (relevant per CHILD-SAFETY-PRIVACY.md).
 
-This is documented for them on the website's `/minecraft` page (under "Console support").
+This is documented for players on the website's `/minecraft` page and in PLAYER-GUIDE.md (console footnote).
 
 ### 2.5 Someone griefed something
 
