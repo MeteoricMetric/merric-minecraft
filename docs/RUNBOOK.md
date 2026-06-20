@@ -242,6 +242,37 @@ See CHILD-SAFETY-PRIVACY.md §5.5. Always tell Shane, even if it seems small.
 
 Re-tuning HP / damage / ability frequency = 🟡. Adding new bosses = 🟡 with PLUGIN-GOVERNANCE-style review.
 
+### 2.13 Everyone gets "Outdated server" / can't connect right after a Minecraft update
+
+**Symptom:** Several players at once (often the whole family) suddenly can't join. Java shows **"Outdated server! I'm still on `<version>`"** on connect; Bedrock players may see it refuse to connect or not appear. The server itself is healthy and reachable — only the *connect* fails.
+
+**Cause:** The server deliberately stays on a pinned stable version (currently **1.21.11** — all 31 plugins are known-good there). **ViaVersion** lets newer *Java* clients talk to it; **Geyser + Floodgate** do the same for *Bedrock*. When Mojang ships a new Minecraft version, everyone's clients auto-update ahead of the server, and these translator plugins — installed before the new version existed — don't yet know how to speak it. Fix = refresh the translators. (We do NOT chase the server version up — ViaVersion exists precisely so we don't have to.)
+
+**Fix (≈2 min, 🟡 — ideally with nobody on).** Reach the host with `ssh 5090` (the alias — never the raw IP, or you hit "too many authentication failures"):
+
+1. Force-refresh the four translator jars. A plain restart auto-updates the Modrinth-sourced ViaVersion/ViaBackwards, but the direct-URL Geyser/Floodgate are cached — so move all four aside to force fresh "latest" downloads:
+   ```bash
+   ssh 5090 'docker exec meteoriccraft sh -c "cd /data/plugins && mkdir -p _preupdate_bak && mv ViaVersion-*.jar ViaBackwards-*.jar Geyser-Spigot.jar floodgate-spigot.jar _preupdate_bak/"'
+   ```
+2. Restart (re-pulls the latest builds; ~1–2 min to boot):
+   ```bash
+   ssh 5090 'docker restart meteoriccraft'
+   ```
+3. Verify over RCON that versions bumped and the plugins are enabled (shown green):
+   ```bash
+   ssh 5090 'docker exec meteoriccraft rcon-cli "version ViaVersion"'
+   ssh 5090 'docker exec meteoriccraft rcon-cli "version Geyser-Spigot"'
+   ssh 5090 'docker exec meteoriccraft rcon-cli "plugins" | grep -iE "via|geyser|floodgate"'
+   ```
+4. Have a player on the *new* client test-connect (Java: Direct Connect `mc.merricstrough.com`, no port; Bedrock: `mc.merricstrough.com` port `47785`).
+5. Once confirmed, delete the backup: `ssh 5090 'docker exec meteoriccraft sh -c "rm -rf /data/plugins/_preupdate_bak"'`
+
+**If it still fails** (the newest ViaVersion/Geyser hasn't shipped support for a brand-new MC version yet — uncommon, usually resolves within a day): interim, players pin their Java client to the server version (Launcher → Installations → release `1.21.11`) or use Bedrock; re-run the refresh once support lands.
+
+**First occurrence:** 2026-06-19, when Minecraft **26.1.2** shipped and clients auto-updated. ViaVersion 5.9.1→5.10.0, ViaBackwards 5.9.1→5.10.0, Geyser 2.10.0→2.10.1, Floodgate b132→b134 fixed it for the whole family.
+
+**Tier:** 🟡 (plugin refresh + restart). Cross-ref: PLUGIN-GOVERNANCE.md for plugin sourcing.
+
 ---
 
 ## 3. Restore drills
