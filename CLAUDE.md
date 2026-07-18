@@ -1,5 +1,11 @@
 # CLAUDE.md — merric-minecraft
 
+> **Cross-project doctrine:** this project follows the one engineering law — reason from
+> first principles on the moat, ride the paved road on the scaffolding, never hand back a
+> blocker you haven't tried to break yourself, and verify against ground truth, not memory.
+> It lives in [`../AI_CODING_DOCTRINE.md`](../AI_CODING_DOCTRINE.md) (root of `projects_root`)
+> and applies here.
+
 > Companion file to the master `CLAUDE.md` in `merricstrough.com`. This one is scoped to infrastructure operations.
 
 ## Project
